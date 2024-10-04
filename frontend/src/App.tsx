@@ -139,35 +139,6 @@ const App: React.FC = () => {
                   <td className='text-center'>{item.GenreIDs?.map((id: number) => genres[id]).join(', ')}</td>
                   <td className='text-center'>{item.StyleIDs?.map((id: number) => styles[id]).join(', ')}</td>
                 </tr>
-                  // <li key={item.ID} className="flex items-start p-2 bg-white shadow-lg rounded-lg">
-                  //   <img
-                  //     src={item.Thumb}
-                  //     alt={item.Title}
-                  //     className="w-20 h-20 rounded-lg mr-6 object-cover"
-                  //   />
-                  //   <div className="flex flex-col space-y-2">
-                  //     <div className="flex flex-row space-x-6">
-                  //       <div>
-                  //         <span className="font-semibold text-lg">{item.Title}</span> ({item.Year}) -{' '}
-                  //         <span className="text-sm text-gray-500">Status: {item.Status}</span>
-                  //       </div>
-                  //       <div>
-                  //         <span className="font-semibold">Artists: </span>
-                  //         <span>{item.ArtistIDs && item.ArtistIDs.length > 0 ? item.ArtistIDs.map((id: number) => artists[id]).join(', ') : 'N/A'}</span>
-                  //       </div>
-                  //     </div>
-                  //     <div className="flex flex-row space-x-6">
-                  //       <div>
-                  //         <span className="font-semibold">Genres: </span>
-                  //         <span>{item.GenreIDs && item.GenreIDs.length > 0 ? item.GenreIDs.map((id: number) => genres[id]).join(', ') : 'N/A'}</span>
-                  //       </div>
-                  //       <div>
-                  //         <span className="font-semibold">Styles: </span>
-                  //         <span>{item.StyleIDs && item.StyleIDs.length > 0 ? item.StyleIDs.map((id: number) => styles[id]).join(', ') : 'N/A'}</span>
-                  //       </div>
-                  //     </div>
-                  //   </div>
-                  // </li>
               ))}
               </tbody>
             </table>
