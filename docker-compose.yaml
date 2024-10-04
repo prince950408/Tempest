@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:14
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: tempest
     ports:
@@ -15,13 +15,16 @@ services:
       - app-network
 
   backend:
-    build: ./backend
+    build:
+      dockerfile: backend/Dockerfile
+      context: .
+      target: dev
     container_name: tempest-backend
     depends_on:
       - postgres
     environment:
       DISCOGS_TOKEN: KPfuWFpyMFeRAPIeVsVkPWGeSoykCxVaHqHLurJj
-      DATABASE_URL: postgresql://postgres:password@postgres:5432/tempest?sslmode=disable
+      DATABASE_URL: postgresql://user:password@postgres:5432/tempest?sslmode=disable
       LABEL_ID: 2175451
       RESULTS_PER_PAGE: 10
     ports:
@@ -29,7 +32,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./backend:/app
+      - ./backend:/opt/app/api
 
   # React Frontend Service
   frontend:

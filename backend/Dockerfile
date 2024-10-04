@@ -1,30 +1,11 @@
 # Stage 1: Build the Go binary
-FROM golang:1.23 AS builder
+FROM golang:1.23 AS base
 
-# Set the working directory inside the container
-WORKDIR /app
+FROM base as dev
 
-# Copy go.mod and go.sum files to download dependencies
-COPY go.mod go.sum ./
-RUN go mod download
+# Install the air binary so we get live code-reloading when we save files
+RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
-# Copy the rest of the application code
-COPY . .
-
-# Build the Go binary
-RUN go build -o main .
-
-# Stage 2: Use a smaller image to run the Go binary
-FROM alpine:3.18
-
-# Set the working directory in the final container
-WORKDIR /root/
-
-# Copy the Go binary from the builder stage
-COPY --from=builder /app/main .
-
-# Expose the port on which the Go app will run
-EXPOSE 8080
-
-# Run the Go binary
-CMD ["./main"]
+# Run the air command in the directory where our code will live
+WORKDIR /opt/app/api
+CMD ["air"]
