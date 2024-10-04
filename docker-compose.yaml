@@ -27,6 +27,7 @@ services:
       DATABASE_URL: postgresql://user:password@postgres:5432/tempest?sslmode=disable
       LABEL_ID: 2175451
       RESULTS_PER_PAGE: 10
+      FETCH_AT_FIRST: true
     ports:
       - "8080:8080"
     networks:

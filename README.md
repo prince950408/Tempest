@@ -21,5 +21,6 @@ cd Tempest
 docker-compose up --build
 ```
 3. Wait a few minutes for the application to fetch data from Discogs.
+You can manage the first running using the `FETCH_AT_FIRST` flag in docker compose file.
 4. If it says `Server is running on port 8080 `, you can access it at:
 [http://localhost:3000](http://localhost:3000)
