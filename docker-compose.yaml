@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tempest
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    container_name: tempest-backend
+    depends_on:
+      - postgres
+    environment:
+      DISCOGS_TOKEN: KPfuWFpyMFeRAPIeVsVkPWGeSoykCxVaHqHLurJj
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/tempest?sslmode=disable
+      LABEL_ID: 2175451
+      RESULTS_PER_PAGE: 10
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    volumes:
+      - ./backend:/app
+
+  # React Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: tempest-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_BASE_URL=http://tempest-backend:8080
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm start
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:
+    driver: bridge
