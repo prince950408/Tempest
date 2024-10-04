@@ -12,16 +12,14 @@ Make sure you have the following installed on your system:
 ## How to Run
 
 1. Clone this repository:
-   ```bash
-   git clone https://github.com/prince950408/Tempest
-   cd Tempest
-   ```
+```bash
+git clone https://github.com/prince950408/Tempest
+cd Tempest
+```
 2. Build and run the application using Docker Compose:
-    ```
-    docker-compose up --build
-    ```
+```
+docker-compose up --build
+```
 3. Wait a few minutes for the application to fetch data from Discogs.
 4. If it says `Initial data fetch completed.`, you can access it at:
-    ```
-    http://localhost:3000
-    ```
+[http://localhost:3000](http://localhost:3000)
