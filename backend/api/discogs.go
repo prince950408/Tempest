@@ -41,6 +41,7 @@ func fetchReleaseDetails(releaseID int) (models.Release, error) {
 
 	url := fmt.Sprintf("https://api.discogs.com/releases/%d?token=%s", releaseID, os.Getenv("DISCOGS_TOKEN"))
 
+	log.Printf("Fetching: %s", url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return response, fmt.Errorf("failed to fetch releases details: %v", err)
